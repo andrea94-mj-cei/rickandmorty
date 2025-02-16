@@ -1,0 +1,63 @@
+*{
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  }
+  
+  li {
+  list-style: none;
+  }
+  
+  /* h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  } */
+  
+  a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  }
+  
+  p a {
+  display: inline;
+  }
+  
+  img, picture, video, iframe {
+  display: block;
+  width: 100%;
+  /* height: initial; */
+  }
+  
+  form, input, label, select, option, textarea, button {
+  font-size: inherit;
+  font-family: inherit;
+  /* display: block; */
+  background-color: transparent;
+  }
+  
+  :root {
+  font-size: 100%;
+  }
+  
+  html {
+  scroll-behavior: smooth;
+  height: 100%;
+  margin: 0;
+  }
+  
+  body {
+  font-family: Helvetica, Arial;
+  }
+
+  /* Fin reset */
+
+  button{
+    padding: 0.7rem;
+    font-size: 1.2rem;
+    background-color: purple;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+  }

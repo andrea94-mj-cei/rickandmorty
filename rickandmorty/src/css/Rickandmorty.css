@@ -1,0 +1,49 @@
+/* PERSONAJES */
+.personajes-container{
+margin: 0 auto;
+}
+.personajes-h1 {
+text-align: center;
+font-size: 2rem;
+color: purple;
+margin-bottom: 1rem;
+}
+.personajes-buttons{
+display: flex;
+flex-flow: row wrap;
+justify-content: center;
+}
+.personajes-grid{
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+/* CARD */
+
+.card {
+width: 250px;
+padding: 1rem;
+margin: 1rem;
+border: solid 2px purple;
+border-radius: 10px;
+text-align: center;
+color: purple;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.card:hover{
+transition: 0.3s;
+transform: scale(1.02);
+cursor: pointer;
+}
+.card-h2{
+margin-bottom: 0.5rem;
+}
+.card-img{
+border: 1px solid purple;
+border-radius: 8px;
+margin-bottom: 0.5rem;
+}
+.card-h3{
+font-size: 1rem;
+margin-bottom: 0.5rem;
+}
