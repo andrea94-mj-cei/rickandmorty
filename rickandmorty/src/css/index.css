@@ -55,8 +55,10 @@
 
   button{
     padding: 0.7rem;
-    font-size: 1.2rem;
-    background-color: purple;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color:rgb(139, 206, 39);
+    border: 2px solid rgb(1, 155, 182);
     border-radius: 8px;
     color: white;
     cursor: pointer;

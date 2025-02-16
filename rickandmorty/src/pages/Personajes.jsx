@@ -28,6 +28,7 @@ const Personajes = () => {
     return (
         <>
             <section className='personajes-container'>
+                <img className='personajes-img' src="/nombre.svg" alt="cabecera" />
                 <h1 className='personajes-h1'>Total de personajes: {info.count}</h1>
                 <div className='personajes-buttons'>
                     <button disabled={!info.prev} onClick={() => { getPersonajes(info.prev) }}>Anterior</button>
