@@ -9,10 +9,13 @@ const Personajes = () => {
         prev: null,
         pages: 0
     });
+
+    
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        getPersonajes('https://rickandmortyapi.com/api/character');
+        getPersonajes(`https://rickandmortyapi.com/api/character`);
+
     }, []);
 
     const getPersonajes = async (url) => {
@@ -24,6 +27,12 @@ const Personajes = () => {
         const page = urlParams.get('page') ? parseInt(urlParams.get('page')) : 1;
         setCurrentPage(page);
     };
+    //filtros
+    
+
+
+    
+
 
     return (
         <>
@@ -35,6 +44,10 @@ const Personajes = () => {
                     <p>Página {currentPage} de {info.pages}</p>
                     <button disabled={!info.next} onClick={() => { getPersonajes(info.next) }}>Siguiente</button>
                 </div>
+                
+                <form action="">
+                    <input className='personajes-input' type="text" />
+                </form>
                 <div className='personajes-grid'>
                     {personajes.map((personaje, id) => (
                         <PersonajeCard key={id} {...personaje} />

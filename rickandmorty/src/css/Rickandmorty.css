@@ -25,6 +25,9 @@ justify-content: center;
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
+.personajes-input{
+    
+}
 
 /* CARD */
 
