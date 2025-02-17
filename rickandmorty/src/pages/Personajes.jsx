@@ -9,33 +9,55 @@ const Personajes = () => {
         prev: null,
         pages: 0
     });
-
-    
     const [currentPage, setCurrentPage] = useState(1);
-
-    const [filter,setFilter] = useState(true);
-    
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filters, setFilters] = useState({
+        status: '',
+        species: '',
+        type: '',
+        gender: ''
+    });
 
     useEffect(() => {
-        getPersonajes(`https://rickandmortyapi.com/api/character`);
-
+        getPersonajes('https://rickandmortyapi.com/api/character');
     }, []);
 
     const getPersonajes = async (url) => {
-        const respuesta = await fetch(url);
-        const objeto = await respuesta.json();
-        setPersonajes(objeto.results);
-        setInfo(objeto.info);
-        const urlParams = new URLSearchParams(url.split('?')[1]);
-        const page = urlParams.get('page') ? parseInt(urlParams.get('page')) : 1;
-        setCurrentPage(page);
+        try {
+            const respuesta = await fetch(url);
+            if (!respuesta.ok) {
+                throw new Error('La respuesta de la red no fue satisfactoria');
+            }
+            const objeto = await respuesta.json();
+            setPersonajes(objeto.results);
+            setInfo(objeto.info);
+            const urlParams = new URLSearchParams(url.split('?')[1]);
+            const page = urlParams.get('page') ? parseInt(urlParams.get('page')) : 1;
+            setCurrentPage(page);
+        } catch (error) {
+            console.error('Error fetching personajes:', error);
+        }
     };
-    //filtros
 
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+    };
 
+    const handleFilterChange = (filterType, value) => {
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            [filterType]: value
+        }));
+        const queryParams = new URLSearchParams({
+            ...filters,
+            [filterType]: value
+        }).toString();
+        getPersonajes(`https://rickandmortyapi.com/api/character?${queryParams}`);
+    };
 
-    
-
+    const filteredPersonajes = personajes.filter(personaje =>
+        personaje.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <>
@@ -47,12 +69,25 @@ const Personajes = () => {
                     <p>Página {currentPage} de {info.pages}</p>
                     <button disabled={!info.next} onClick={() => { getPersonajes(info.next) }}>Siguiente</button>
                 </div>
-                
-                <form action="">
-                    <input className='personajes-input' type="text" />
-                </form>
+                <input
+                    type="text"
+                    placeholder=" 🔍 Busca un personaje"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    className='personajes-input'
+                />
+                <div className='filter-buttons'>
+                    <button onClick={() => handleFilterChange('status', 'alive')}>Alive</button>
+                    <button onClick={() => handleFilterChange('status', 'dead')}>Dead</button>
+                    <button onClick={() => handleFilterChange('status', 'unknown')}>Unknown</button>
+                    <button onClick={() => handleFilterChange('gender', 'female')}>Female</button>
+                    <button onClick={() => handleFilterChange('gender', 'male')}>Male</button>
+                    <button onClick={() => handleFilterChange('gender', 'genderless')}>Genderless</button>
+                    <button onClick={() => handleFilterChange('gender', 'unknown')}>Unknown</button>
+                    {/* Agrega más botones para species y type según sea necesario */}
+                </div>
                 <div className='personajes-grid'>
-                    {personajes.map((personaje, id) => (
+                    {filteredPersonajes.map((personaje, id) => (
                         <PersonajeCard key={id} {...personaje} />
                     ))}
                 </div>
