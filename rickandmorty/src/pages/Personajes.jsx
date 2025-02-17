@@ -13,6 +13,9 @@ const Personajes = () => {
     
     const [currentPage, setCurrentPage] = useState(1);
 
+    const [filter,setFilter] = useState(true);
+    
+
     useEffect(() => {
         getPersonajes(`https://rickandmortyapi.com/api/character`);
 
@@ -28,7 +31,7 @@ const Personajes = () => {
         setCurrentPage(page);
     };
     //filtros
-    
+
 
 
     
