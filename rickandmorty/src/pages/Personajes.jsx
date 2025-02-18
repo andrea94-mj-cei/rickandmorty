@@ -9,6 +9,7 @@ const Personajes = () => {
         prev: null,
         pages: 0
     });
+
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
     const [filters, setFilters] = useState({
@@ -26,7 +27,7 @@ const Personajes = () => {
         try {
             const respuesta = await fetch(url);
             if (!respuesta.ok) {
-                throw new Error('La respuesta de la red no fue satisfactoria');
+                throw new Error('Algo ha ido mal');
             }
             const objeto = await respuesta.json();
             setPersonajes(objeto.results);
@@ -35,7 +36,7 @@ const Personajes = () => {
             const page = urlParams.get('page') ? parseInt(urlParams.get('page')) : 1;
             setCurrentPage(page);
         } catch (error) {
-            console.error('Error fetching personajes:', error);
+            console.error('Error en el fetch:', error);
         }
     };
 
@@ -84,7 +85,7 @@ const Personajes = () => {
                     <button onClick={() => handleFilterChange('gender', 'male')}>Male</button>
                     <button onClick={() => handleFilterChange('gender', 'genderless')}>Genderless</button>
                     <button onClick={() => handleFilterChange('gender', 'unknown')}>Unknown</button>
-                    {/* Agrega más botones para species y type según sea necesario */}
+                    
                 </div>
                 <div className='personajes-grid'>
                     {filteredPersonajes.map((personaje, id) => (
